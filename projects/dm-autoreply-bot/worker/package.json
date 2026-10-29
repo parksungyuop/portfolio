@@ -1,0 +1,16 @@
+{
+  "name": "dmbot-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --test-scheduled",
+    "deploy": "npm --prefix ../dashboard run build && wrangler deploy",
+    "test": "node test/run.mjs",
+    "secrets": "node upload-secrets.mjs",
+    "paste-token": "node paste-secret.mjs token",
+    "paste-secret": "node paste-secret.mjs secret"
+  },
+  "devDependencies": {
+    "wrangler": "4.151.1"
+  }
+}

@@ -1,0 +1,129 @@
+:root {
+  --bg: #f6f6f4;
+  --card: #ffffff;
+  --text: #1c1c1a;
+  --muted: #6b6b66;
+  --line: #e4e3df;
+  --accent: #3b5bdb;
+  --on: #2b8a3e;
+  --off: #c92a2a;
+  --warn: #e67700;
+  --radius: 10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #161615; --card: #1f1f1d; --text: #ecebe7; --muted: #9b9a94; --line: #33332f;
+    --accent: #748ffc; --on: #51cf66; --off: #ff6b6b; --warn: #ffa94d;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+button, input, textarea, select { font: inherit; color: inherit; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.muted { color: var(--muted); font-size: 13px; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.grow { flex: 1; min-width: 0; }
+h1 { font-size: 18px; margin: 0; }
+h2 { font-size: 16px; margin: 0 0 12px; }
+
+.btn {
+  border: 1px solid var(--line); background: var(--card); border-radius: 8px;
+  padding: 6px 12px; cursor: pointer;
+}
+.btn:hover { border-color: var(--muted); }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.small { padding: 3px 9px; font-size: 13px; }
+
+input[type=text], input[type=email], input[type=password], input[type=number], textarea, select {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg);
+}
+textarea { min-height: 120px; resize: vertical; }
+label { display: block; margin: 12px 0 4px; font-weight: 600; font-size: 14px; }
+label > input, label > textarea { display: block; margin-top: 4px; font-weight: 400; font-size: 15px; }
+
+/* 전체 스위치 */
+.master { display: flex; align-items: center; gap: 16px; padding: 16px; border-radius: var(--radius); color: #fff; }
+.master.on { background: var(--on); }
+.master.off { background: var(--off); }
+.master strong { font-size: 18px; }
+.master .btn { background: #fff; color: #111; border: 0; font-weight: 600; }
+
+.banner { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--warn); color: var(--warn); margin-top: 12px; }
+
+.tabs { display: flex; gap: 4px; margin: 16px 0 12px; overflow-x: auto; }
+.tab { padding: 8px 14px; border: 0; background: none; border-radius: 8px; cursor: pointer; white-space: nowrap; color: var(--muted); }
+.tab.active { background: var(--card); color: var(--text); font-weight: 600; border: 1px solid var(--line); }
+.badge { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 4px; border-radius: 9px; background: var(--off); color: #fff; font-size: 12px; text-align: center; }
+
+.list { display: grid; gap: 8px; }
+.item { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+.item .summary { white-space: pre-wrap; font-size: 14px; margin-top: 8px; }
+.item .text { white-space: pre-wrap; margin-top: 6px; }
+.pill { font-size: 12px; padding: 1px 8px; border-radius: 10px; border: 1px solid var(--line); color: var(--muted); }
+.pill.warn { border-color: var(--warn); color: var(--warn); }
+.pill.bad { border-color: var(--off); color: var(--off); }
+.pill.good { border-color: var(--on); color: var(--on); }
+
+/* 토글 */
+.switch { position: relative; width: 44px; height: 24px; flex: none; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch span { position: absolute; inset: 0; background: var(--line); border-radius: 12px; cursor: pointer; transition: background .15s; }
+.switch span::after { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .15s; }
+.switch input:checked + span { background: var(--on); }
+.switch input:checked + span::after { transform: translateX(20px); }
+.switch input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.login { max-width: 360px; margin: 12vh auto; }
+.toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 8px 16px; border-radius: 8px; font-size: 14px; max-width: calc(100% - 32px); }
+.toast.error { background: var(--off); color: #fff; }
+pre.stats { font-size: 12px; background: var(--bg); padding: 8px; border-radius: 6px; overflow-x: auto; margin: 8px 0 0; }
+
+/* 드롭다운이 긴 이름 때문에 화면 밖으로 밀려나지 않게 */
+select { max-width: 100%; }
+.row > select { flex: 1 1 160px; min-width: 0; }
+.tabs { flex-wrap: wrap; }
+.list { grid-template-columns: minmax(0, 1fr); }   /* 긴 내용이 카드를 화면 밖으로 밀지 않게 */
+
+/* 휴대폰 (iPhone 14 Pro 393px 기준) */
+@media (max-width: 600px) {
+  .wrap { padding: calc(12px + env(safe-area-inset-top)) 12px calc(16px + env(safe-area-inset-bottom)); }
+  .card, .master { padding: 12px; }
+  .master { gap: 10px; }
+  .master strong { font-size: 16px; }
+  .row { gap: 8px; }
+  /* iOS 는 16px 미만 입력칸을 누르면 화면을 확대함 */
+  input[type=text], input[type=email], input[type=password], input[type=number], input[type=date], input[type=time], textarea, select { font-size: 16px; }
+  /* 손가락으로 누르기 좋은 크기 */
+  .btn { min-height: 40px; }
+  .btn.small { min-height: 36px; padding: 6px 12px; }
+  .tab { padding: 8px 10px; }
+  .switch { transform: scale(1.15); margin: 0 4px; }
+}
+
+/* 캘린더 시간대 */
+.hour { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--line); min-height: 40px; }
+.hour:last-child { border-bottom: 0; }
+.hour.busy .hour-label { color: var(--text); font-weight: 600; }
+.hour-label { width: 36px; flex: none; }
+input[type=time], input[type=date] { padding: 7px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+
+/* 휴대폰: 탭 줄은 한 줄 가로 스크롤 + 화면 맨 위에 고정 (홈 화면 앱이면 다이내믹 아일랜드 아래) */
+@media (max-width: 600px) {
+  .tabs {
+    position: sticky; top: env(safe-area-inset-top); z-index: 5; background: var(--bg);
+    flex-wrap: nowrap; overflow-x: auto; margin: 12px -12px; padding: 6px 12px;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { flex: none; }
+}
+
+/* 링크를 버튼 모양으로 (인스타에서 열기) */
+a.btn { text-decoration: none; display: inline-flex; align-items: center; }

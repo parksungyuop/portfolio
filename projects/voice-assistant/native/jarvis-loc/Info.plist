@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>CFBundleIdentifier</key><string>dev.jarvis.loc</string>
+  <key>CFBundleName</key><string>Jarvis Location</string>
+  <key>NSLocationWhenInUseUsageDescription</key><string>자비스가 현재 위치의 날씨를 알려 주기 위해 위치를 사용합니다.</string>
+  <key>NSLocationUsageDescription</key><string>자비스가 현재 위치의 날씨를 알려 주기 위해 위치를 사용합니다.</string>
+</dict></plist>

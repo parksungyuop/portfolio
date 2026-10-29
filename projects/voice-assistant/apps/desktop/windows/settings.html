@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self'; connect-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+<title>Jarvis 설정</title>
+<style>
+  @font-face { font-family: Pretendard; src: url('../renderer/fonts/PretendardVariable.woff2') format('woff2-variations'); font-weight: 45 920; }
+  body { margin: 0; padding: 24px; background: #06111c; color: #cfe9ff; font: 14px/1.5 Pretendard, -apple-system, sans-serif; }
+  h1 { font-size: 15px; margin: 0 0 16px; letter-spacing: 2px; color: #34e1ff; }
+  label { display: block; margin: 12px 0 4px; color: #8ed9ff; }
+  input { width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid #1e4a66; border-radius: 6px; background: #041019; color: #fff; font: inherit; }
+  button { margin-top: 14px; padding: 9px 16px; border: 0; border-radius: 6px; background: #34e1ff; color: #02060d; font: 600 13px Pretendard, sans-serif; cursor: pointer; }
+  .hint { color: #5f8fae; font-size: 12px; margin-top: 8px; }
+</style></head>
+<body>
+<h1>JARVIS 설정</h1>
+<div>목소리: <span id="voice"></span></div>
+<label for="key">ElevenLabs API 키 <span id="state"></span></label>
+<input id="key" type="password" placeholder="sk_… (저장 후 이 칸은 비워집니다)" autocomplete="off">
+<button id="save">저장</button>
+<div class="hint">키는 macOS 키체인 기반 safeStorage 로 암호화되어 이 Mac 에만 저장됩니다. 비우고 저장하면 삭제됩니다.</div>
+<script>
+  const $ = (id) => document.getElementById(id)
+  async function refresh() { const s = await window.jarvis.settingsGet(); $('voice').textContent = s.voiceId; $('state').textContent = s.hasElevenLabsKey ? '(저장됨)' : '(없음 → Yuna)' }
+  $('save').onclick = async () => { await window.jarvis.settingsSetKey($('key').value); $('key').value = ''; await refresh() }
+  refresh()
+</script>
+</body></html>

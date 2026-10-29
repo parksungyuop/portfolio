@@ -1,0 +1,14 @@
+# public_html/ig/.htaccess
+Options -Indexes
+
+# 공유 호스팅(FastCGI/CGI)에서 Authorization 헤더가 PHP 로 안 넘어가는 문제 방지 (api.php 로그인 검증용)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP:Authorization} .
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+# 이 폴더에는 webhook.php, api.php, dash/ 만 있어야 함
+<FilesMatch "\.(json|log|ini|env|sql|md)$">
+  Require all denied
+</FilesMatch>

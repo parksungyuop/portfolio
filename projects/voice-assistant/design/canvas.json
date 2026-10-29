@@ -1,0 +1,13 @@
+{
+  "artboards": [
+    { "file": "Orb.dc.html", "x": 0, "y": 0, "w": 1440, "h": 900, "title": "1 · 평소 — 오브 (IDLE)" },
+    { "file": "Main.dc.html", "x": 1560, "y": 0, "w": 1440, "h": 900, "title": "2 · 헤이 자비스 — 전체 화면 HUD" },
+    { "file": "Collapsed.dc.html", "x": 3120, "y": 0, "w": 1440, "h": 900, "title": "3 · 화면 작게 — 자막 패널 + 확인 카드" },
+    { "file": "Onboarding.dc.html", "x": 0, "y": 1040, "w": 760, "h": 560, "title": "4 · 첫 실행 온보딩" },
+    { "file": "Settings.dc.html", "x": 880, "y": 1040, "w": 800, "h": 640, "title": "5 · 설정 — 연결·비밀" }
+  ],
+  "annotations": [
+    { "id": "flow-note", "x": 1560, "y": -150, "w": 520, "text": "흐름: 오브(1) → \"헤이 자비스\" → 전체 화면(2) → \"화면 작게\" → 자막 패널(3) → \"화면 열어\" → 전체 화면(2). 전체 화면의 state 트윅으로 Listening / Thinking / Speaking / 실행 확인 상태를 바꿔 볼 수 있습니다." }
+  ],
+  "launch": { "view": "canvas" }
+}

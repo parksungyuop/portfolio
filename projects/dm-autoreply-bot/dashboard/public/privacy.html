@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개인정보처리방침</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<style>
+  :root { --bg: #f6f6f4; --card: #fff; --text: #1c1c1a; --muted: #6b6b66; --line: #e4e3df; --accent: #3b5bdb; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #161615; --card: #1f1f1d; --text: #ecebe7; --muted: #9b9a94; --line: #33332f; --accent: #748ffc; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.7 -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  h2 { font-size: 17px; margin: 28px 0 8px; }
+  .muted { color: var(--muted); font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--card); }
+  a { color: var(--accent); }
+  hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0 24px; }
+  ul { padding-left: 20px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>개인정보처리방침</h1>
+  <p class="muted">DM봇 (인스타그램 DM 자동답변) · 시행일 2026년 10월 19일</p>
+
+  <p>DM봇은 운영자(홍길동)의 인스타그램 프로페셔널 계정으로 받은 Direct 메시지에 운영자를 대신해 답장하는 개인용 서비스입니다.
+  이 방침은 해당 계정에 메시지를 보낸 분의 정보를 어떻게 처리하는지 설명합니다.</p>
+
+  <h2>1. 처리하는 정보</h2>
+  <table>
+    <tr><th>항목</th><th>내용</th></tr>
+    <tr><td>인스타그램 식별 정보</td><td>Instagram이 제공하는 사용자 ID(IGSID), 사용자 이름(아이디), 표시 이름</td></tr>
+    <tr><td>메시지</td><td>운영자 계정과 주고받은 Direct 메시지의 텍스트와 보낸 시각. 사진·동영상·게시물 공유 등 첨부는 저장하지 않습니다</td></tr>
+    <tr><td>약속 기록</td><td>약속 요청 메시지와 운영자가 정한 날짜</td></tr>
+  </table>
+  <p>위 정보는 Instagram Messaging API(Meta)를 통해서만 받으며, 그 밖의 경로로 수집하지 않습니다.</p>
+
+  <h2>2. 이용 목적</h2>
+  <ul>
+    <li>받은 메시지에 대한 답장 작성·발송</li>
+    <li>운영자가 대화 내용을 확인할 수 있도록 대화 요약 작성</li>
+    <li>약속 요청 관리</li>
+  </ul>
+  <p>광고, 마케팅, 프로필 분석, 제3자 판매 목적으로 이용하지 않습니다.</p>
+
+  <h2>3. 처리 위탁 (서비스 제공에 쓰는 외부 업체)</h2>
+  <table>
+    <tr><th>업체</th><th>역할</th></tr>
+    <tr><td>Meta Platforms (Instagram)</td><td>메시지 수신·발송</td></tr>
+    <tr><td>Supabase</td><td>데이터 저장 (메시지 원문은 AES-256-GCM 으로 암호화해 저장)</td></tr>
+    <tr><td>Anthropic (Claude API)</td><td>답장·요약 문장 생성. 최근 대화 일부가 생성 요청에 포함됩니다</td></tr>
+    <tr><td>Cloudflare</td><td>서비스 서버 운영</td></tr>
+  </table>
+
+  <h2>4. 보관 기간</h2>
+  <table>
+    <tr><th>정보</th><th>보관 기간</th></tr>
+    <tr><td>메시지 원문</td><td>90일 후 자동 삭제</td></tr>
+    <tr><td>발송 기록</td><td>180일 후 자동 삭제</td></tr>
+    <tr><td>처리 대기 기록</td><td>30~90일 후 자동 삭제</td></tr>
+    <tr><td>완료·취소된 약속 기록</td><td>180일 후 자동 삭제</td></tr>
+  </table>
+
+  <h2>5. 안전성 확보 조치</h2>
+  <ul>
+    <li>메시지 원문 암호화 저장, 관리 화면은 운영자 1인만 로그인 가능</li>
+    <li>Instagram 웹훅은 서명 검증 후에만 처리, 모든 통신은 HTTPS</li>
+  </ul>
+
+  <h2 id="delete">6. 정보 삭제 요청과 권리</h2>
+  <p>본인의 정보 열람·삭제를 원하시면 운영자 인스타그램 계정으로 Direct 메시지를 보내 "데이터 삭제 요청"이라고 알려 주세요.
+  확인 후 30일 이내에 해당 사용자 ID 와 연결된 메시지·요약·약속 기록을 모두 삭제하고 결과를 알려 드립니다.
+  Instagram 설정에서 이 서비스의 연결을 해제할 수도 있습니다.</p>
+
+  <h2>7. 문의</h2>
+  <p>운영자: 홍길동 · 문의: 운영자 인스타그램 계정 Direct 메시지</p>
+
+  <h2>8. 변경</h2>
+  <p>방침이 바뀌면 이 페이지에 시행일과 함께 게시합니다.</p>
+
+  <hr>
+
+  <h1 style="font-size:20px">Privacy Policy (English summary)</h1>
+  <p class="muted">DM봇 · Effective October 19, 2026</p>
+  <p>DM봇 is a personal service that replies on behalf of its operator (Gildong Hong) to Direct messages received by the operator's Instagram professional account.</p>
+  <ul>
+    <li><b>Data processed:</b> Instagram-scoped user ID, username and display name; text and timestamps of Direct messages exchanged with the operator's account; appointment requests. Attachments are not stored. Data is received only through the Instagram Messaging API.</li>
+    <li><b>Purpose:</b> composing and sending replies, summarizing conversations for the operator, managing appointment requests. No advertising, profiling or sale to third parties.</li>
+    <li><b>Processors:</b> Meta (messaging), Supabase (storage; message text encrypted with AES-256-GCM), Anthropic Claude API (reply and summary generation), Cloudflare (hosting).</li>
+    <li><b>Retention:</b> message text 90 days, send logs 180 days, then deleted automatically.</li>
+    <li id="delete-en"><b>Data deletion:</b> send a Direct message saying "data deletion request" to the operator's Instagram account. All messages, summaries and appointment records linked to your user ID will be deleted within 30 days and you will be notified.</li>
+    <li><b>Contact:</b> Direct message to the operator's Instagram account.</li>
+  </ul>
+</main>
+</body>
+</html>

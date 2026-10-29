@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "profiles": [],
+  "conversations": [
+    {
+      "id": "sora",
+      "memberIds": [
+        "demo",
+        "sora"
+      ],
+      "messages": [
+        {
+          "id": "msg-sora-1",
+          "senderId": "sora",
+          "body": "안녕하세요! 노기 드릴 위주로 찾고 계신 걸 봤어요.",
+          "createdAt": "2026-08-02T01:23:00.000Z"
+        },
+        {
+          "id": "msg-sora-2",
+          "senderId": "demo",
+          "body": "네, 무리하지 않고 1시간 정도 같이 해보고 싶어요.",
+          "createdAt": "2026-08-02T01:27:00.000Z"
+        },
+        {
+          "id": "msg-sora-3",
+          "senderId": "sora",
+          "body": "토요일 11시 오픈매트 괜찮아요!",
+          "createdAt": "2026-08-02T01:32:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "dohyun",
+      "memberIds": [
+        "demo",
+        "dohyun"
+      ],
+      "messages": [
+        {
+          "id": "msg-dohyun-1",
+          "senderId": "dohyun",
+          "body": "화요일 8시 이후 가능합니다. 보호장비는 모두 있어요.",
+          "createdAt": "2026-08-01T12:12:00.000Z"
+        }
+      ]
+    }
+  ],
+  "matchRequests": [
+    {
+      "id": "request-seed-yeonwoo-1",
+      "fromUserId": "yeonwoo",
+      "toUserId": "demo",
+      "purpose": "라이트 스파링",
+      "intensity": "라이트",
+      "preferredTime": "이번 주 화요일 20:00",
+      "venueType": "공개 오픈매트에서",
+      "message": "클린치 위주로 가볍게 맞춰보고 싶어요. 정강이 보호대와 마우스피스 모두 있습니다.",
+      "status": "pending",
+      "createdAt": "2026-08-27T09:00:00.000Z"
+    }
+  ]
+}

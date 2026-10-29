@@ -1,0 +1,9 @@
+packages:
+  - packages/*
+  - apps/*
+# pnpm 11: 빌드 스크립트 허용은 allowBuilds 맵으로 (onlyBuiltDependencies 는 더 이상 읽지 않는다)
+allowBuilds:
+  electron: true
+  onnxruntime-node: true
+  esbuild: true
+  protobufjs: false

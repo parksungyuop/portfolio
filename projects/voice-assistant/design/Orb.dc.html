@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #1b1f27; }
+    a { color: #34e1ff; } a:hover { color: #8ed9ff; }
+    .d, .d * { box-sizing: border-box; font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", -apple-system, sans-serif; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spin { transform-origin: 50% 50%; animation: spin 20s linear infinite; }
+  </style>
+</helmet>
+<div class="d" style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: linear-gradient(160deg, #1d2230 0%, #10141c 100%);">
+  <!-- 메뉴바 -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 36px; background: rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; gap: 22px; padding: 0 20px; font-size: 14px; color: #c9d1d9;">
+    <span style="font-weight: 600;">Finder</span><span>파일</span><span>편집</span><span>보기</span><span>이동</span><span>윈도우</span>
+    <span style="margin-left: auto; display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #34e1ff; box-shadow: 0 0 8px #34e1ff;"></span><span style="font-size: 13px;">09:41</span></span>
+  </div>
+  <!-- 작업 창들 -->
+  <div style="position: absolute; left: 40px; top: 70px; width: 840px; height: 760px; border-radius: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);">
+    <div style="height: 34px; border-radius: 10px 10px 0 0; background: rgba(255,255,255,.07); display: flex; align-items: center; gap: 8px; padding: 0 14px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840;"></span></div>
+  </div>
+  <div style="position: absolute; left: 910px; top: 70px; width: 490px; height: 420px; border-radius: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);">
+    <div style="height: 34px; border-radius: 10px 10px 0 0; background: rgba(255,255,255,.07); display: flex; align-items: center; gap: 8px; padding: 0 14px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840;"></span></div>
+  </div>
+
+  <!-- 오브 (IDLE) -->
+  <div style="position: absolute; right: 44px; bottom: 44px; width: 96px; height: 96px;">
+    <svg viewBox="0 0 96 96" width="96" height="96" style="overflow: visible;">
+      <defs>
+        <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#34e1ff"/><stop offset="100%" stop-color="#34e1ff" stop-opacity="0"/></radialGradient>
+        <filter id="og" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <g class="spin"><circle cx="48" cy="48" r="46" fill="none" stroke="#34e1ff" stroke-width="1.5" stroke-dasharray="7 6" opacity=".55"/></g>
+      <circle cx="48" cy="48" r="34" fill="none" stroke="#34e1ff" stroke-width="1.5" opacity=".8" filter="url(#og)"/>
+      <circle cx="48" cy="48" r="20" fill="url(#orbGlow)" filter="url(#og)"/>
+    </svg>
+  </div>
+  <!-- 마이크 감지 중 표시 -->
+  <div style="position: absolute; right: 152px; bottom: 76px; display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #8ed9ff;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8ed9ff" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+    <span>듣는 중</span>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@200;400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #02060d; }
+    a { color: #34e1ff; } a:hover { color: #8ed9ff; }
+    .w, .w * { box-sizing: border-box; font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", -apple-system, sans-serif; }
+  </style>
+</helmet>
+<div class="w" style="position: relative; width: 760px; height: 560px; overflow: hidden; border-radius: 14px; color: #d9f6ff; background: radial-gradient(ellipse at 30% 20%, #0a2238 0%, #02060d 70%); display: grid; grid-template-columns: 240px minmax(0, 1fr);">
+  <!-- 왼쪽: 단계 목록 -->
+  <div style="padding: 32px 24px; border-right: 1px solid rgba(52,225,255,.25); display: flex; flex-direction: column; gap: 6px;">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #8ed9ff; margin-bottom: 14px;">첫 실행 · 7단계</div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(52,225,255,.12); border: 1px solid rgba(52,225,255,.45); font-size: 14px; color: #ffffff;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #34e1ff; color: #02060d; font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center;">1</span>마이크 권한</div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 14px; color: rgba(217,246,255,.7);"><span style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(52,225,255,.45); font-size: 12px; display: flex; align-items: center; justify-content: center;">2</span>녹음·전송 고지</div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 14px; color: rgba(217,246,255,.7);"><span style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(52,225,255,.45); font-size: 12px; display: flex; align-items: center; justify-content: center;">3</span>맥 캘린더 연결</div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 14px; color: rgba(217,246,255,.7);"><span style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(52,225,255,.45); font-size: 12px; display: flex; align-items: center; justify-content: center;">4</span>목소리 (ElevenLabs)</div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 14px; color: rgba(217,246,255,.7);"><span style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(52,225,255,.45); font-size: 12px; display: flex; align-items: center; justify-content: center;">5</span>영상 포털 토큰</div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 14px; color: rgba(217,246,255,.7);"><span style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(52,225,255,.45); font-size: 12px; display: flex; align-items: center; justify-content: center;">6</span>"Yes, boss" 만들기</div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; font-size: 14px; color: rgba(217,246,255,.7);"><span style="width: 22px; height: 22px; border-radius: 50%; border: 1px solid rgba(52,225,255,.45); font-size: 12px; display: flex; align-items: center; justify-content: center;">7</span>시험 발화</div>
+  </div>
+  <!-- 오른쪽: 현재 단계 -->
+  <div style="padding: 40px 44px; display: flex; flex-direction: column; gap: 18px;">
+    <div style="font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #8ed9ff;">1 / 7</div>
+    <div style="font-size: 30px; font-weight: 200; color: #ffffff; line-height: 1.25;">자비스가 들을 수 있게<br>마이크를 허용해 주세요</div>
+    <div style="font-size: 15px; line-height: 1.6; color: rgba(217,246,255,.85);">"헤이 자비스"를 알아듣기 위해 마이크를 항상 켜 둡니다. 음성 인식은 이 맥 안에서만 처리되고, 한국어 음성은 밖으로 나가지 않습니다.</div>
+    <div style="display: flex; align-items: center; gap: 14px; padding: 16px 18px; border: 1.5px solid rgba(52,225,255,.45); border-radius: 12px; background: rgba(10,40,70,.35);">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34e1ff" stroke-width="2" stroke-linecap="round" style="flex: none;"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      <div style="display: flex; flex-direction: column; gap: 2px;"><div style="font-size: 15px; font-weight: 500; color: #ffffff;">마이크 · 대기 중</div><div style="font-size: 13px; color: rgba(217,246,255,.7);">macOS 권한 창에서 "허용"을 누르면 자동으로 다음 단계로 갑니다</div></div>
+    </div>
+    <div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
+      <div style="font-size: 13px; color: rgba(142,217,255,.6);">빠진 단계는 나중에 시스템 위젯에서 다시 열 수 있습니다</div>
+      <div style="display: flex; gap: 10px;">
+        <div style="height: 44px; padding: 0 18px; border-radius: 10px; border: 1px solid rgba(52,225,255,.35); display: flex; align-items: center; font-size: 14px; color: #8ed9ff;">건너뛰기</div>
+        <div style="height: 44px; padding: 0 22px; border-radius: 10px; background: #34e1ff; box-shadow: 0 0 18px rgba(52,225,255,.5); display: flex; align-items: center; font-size: 14px; font-weight: 600; color: #02060d;">권한 요청</div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

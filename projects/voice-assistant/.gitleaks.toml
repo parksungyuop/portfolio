@@ -1,0 +1,11 @@
+title = "multibot-platform gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Explicit non-secret used only by local TEST bootstrap"
+regexTarget = "match"
+regexes = [
+  '''local-test-only-not-a-secret''',
+]

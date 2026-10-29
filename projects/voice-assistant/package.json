@@ -1,0 +1,41 @@
+{
+  "name": "jarvis",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=11"
+  },
+  "scripts": {
+    "check": "tsc -b && vitest run",
+    "test": "vitest run",
+    "spike:stt": "tsx scripts/spike-stt.ts",
+    "spike:sdk": "tsx scripts/spike-sdk.ts",
+    "spike:wake": "tsx scripts/spike-wake.ts",
+    "spike:tts": "tsx scripts/spike-tts.ts",
+    "spike:cal": "tsx scripts/spike-cal.ts",
+    "spike:hud": "tsx scripts/spike-hud.ts",
+    "build:ear": "bash scripts/build-ear.sh",
+    "postinstall": "node node_modules/electron/install.js",
+    "start": "pnpm --filter @jarvis/desktop start",
+    "build": "tsc -b && pnpm --filter @jarvis/desktop build",
+    "agent:install": "pnpm build && tsx scripts/install-launch-agent.ts",
+    "agent:uninstall": "tsx scripts/install-launch-agent.ts --uninstall"
+  },
+  "devDependencies": {
+    "@anthropic-ai/claude-agent-sdk": "0.3.280",
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "@types/node": "^24.0.0",
+    "@types/ws": "^8.18.0",
+    "electron": "^44.2.0",
+    "onnxruntime-node": "1.30.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0",
+    "ws": "^8.18.0",
+    "zod": "^3.25.0"
+  },
+  "dependencies": {
+    "@jarvis/core": "workspace:*"
+  }
+}

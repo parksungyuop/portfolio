@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #1b1f27; }
+    a { color: #34e1ff; } a:hover { color: #8ed9ff; }
+    .d, .d * { box-sizing: border-box; font-family: "Pretendard Variable", Pretendard, "Noto Sans KR", -apple-system, sans-serif; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spin { transform-origin: 50% 50%; animation: spin 20s linear infinite; }
+  </style>
+</helmet>
+<div class="d" style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: linear-gradient(160deg, #1d2230 0%, #10141c 100%);">
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 36px; background: rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; gap: 22px; padding: 0 20px; font-size: 14px; color: #c9d1d9;">
+    <span style="font-weight: 600;">Finder</span><span>파일</span><span>편집</span><span>보기</span><span>이동</span><span>윈도우</span>
+    <span style="margin-left: auto; display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #34e1ff; box-shadow: 0 0 8px #34e1ff;"></span><span style="font-size: 13px;">09:41</span></span>
+  </div>
+  <div style="position: absolute; left: 40px; top: 70px; width: 840px; height: 760px; border-radius: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);">
+    <div style="height: 34px; border-radius: 10px 10px 0 0; background: rgba(255,255,255,.07); display: flex; align-items: center; gap: 8px; padding: 0 14px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840;"></span></div>
+  </div>
+  <div style="position: absolute; left: 910px; top: 70px; width: 490px; height: 420px; border-radius: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);">
+    <div style="height: 34px; border-radius: 10px 10px 0 0; background: rgba(255,255,255,.07); display: flex; align-items: center; gap: 8px; padding: 0 14px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #ff5f57;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #febc2e;"></span><span style="width: 12px; height: 12px; border-radius: 50%; background: #28c840;"></span></div>
+  </div>
+
+  <!-- 자막 패널 -->
+  <div style="position: absolute; right: 164px; bottom: 56px; width: 600px; padding: 20px 24px; border: 1.5px solid rgba(52,225,255,.55); border-radius: 12px; background: rgba(3,8,16,.92); box-shadow: 0 0 36px rgba(52,225,255,.2); display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #8ed9ff;">Speaking · 자비스</span>
+      <span style="font-size: 12px; letter-spacing: 2px; color: rgba(142,217,255,.6);">"화면 열어"로 전체 화면</span>
+    </div>
+    <div style="font-size: 16px; color: rgba(142,217,255,.85);">"오늘 배치 5편 돌려"</div>
+    <div style="font-size: 19px; font-weight: 500; color: #ffffff; line-height: 1.5;">역사 카테고리 5편을 지금 만들까요, 보스?</div>
+    <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid #ff9f43; border-radius: 10px; background: rgba(255,159,67,.08);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ff9f43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex: none;"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5v.5"/></svg>
+      <div style="font-size: 14px; color: #ffd8b0;"><b style="color: #ff9f43;">쓰기 명령</b> — "실행 확인"이라고 말씀하시거나 ⌥⏎ · 30초 안에</div>
+    </div>
+    <div style="display: flex; gap: 4px; align-items: flex-end; height: 22px;">
+      <span style="width: 5px; height: 40%; background: #34e1ff; box-shadow: 0 0 6px #34e1ff;"></span><span style="width: 5px; height: 90%; background: #34e1ff; box-shadow: 0 0 6px #34e1ff;"></span><span style="width: 5px; height: 60%; background: #34e1ff; box-shadow: 0 0 6px #34e1ff;"></span><span style="width: 5px; height: 100%; background: #34e1ff; box-shadow: 0 0 6px #34e1ff;"></span><span style="width: 5px; height: 35%; background: #34e1ff; box-shadow: 0 0 6px #34e1ff;"></span><span style="width: 5px; height: 75%; background: #34e1ff; box-shadow: 0 0 6px #34e1ff;"></span><span style="width: 5px; height: 50%; background: #34e1ff; box-shadow: 0 0 6px #34e1ff;"></span><span style="width: 5px; height: 25%; background: #34e1ff; box-shadow: 0 0 6px #34e1ff;"></span>
+    </div>
+  </div>
+
+  <!-- 오브 -->
+  <div style="position: absolute; right: 44px; bottom: 44px; width: 96px; height: 96px;">
+    <svg viewBox="0 0 96 96" width="96" height="96" style="overflow: visible;">
+      <defs>
+        <radialGradient id="orbGlow2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffffff"/><stop offset="35%" stop-color="#34e1ff"/><stop offset="100%" stop-color="#34e1ff" stop-opacity="0"/></radialGradient>
+        <filter id="og2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <g class="spin"><circle cx="48" cy="48" r="46" fill="none" stroke="#34e1ff" stroke-width="1.5" stroke-dasharray="7 6" opacity=".55"/></g>
+      <circle cx="48" cy="48" r="34" fill="none" stroke="#34e1ff" stroke-width="1.5" opacity=".8" filter="url(#og2)"/>
+      <circle cx="48" cy="48" r="20" fill="url(#orbGlow2)" filter="url(#og2)"/>
+    </svg>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

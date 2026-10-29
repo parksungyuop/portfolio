@@ -1,0 +1,37 @@
+# 인스타 DM 봇 — Cloudflare Worker (웹훅 + 대시보드 API + 1분 크론 + 대시보드 정적 파일)
+name = "dmbot"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# bot.example.com 로 연결 (같은 Cloudflare 계정이라 DNS 자동 생성)
+routes = [{ pattern = "bot.example.com", custom_domain = true }]
+
+# 대시보드(빌드 결과물)를 같은 주소에서 서비스. /ig/* 처럼 파일이 없는 경로만 Worker 코드로 감
+[assets]
+directory = "../dashboard/dist"
+binding = "ASSETS"
+run_worker_first = true   # 모든 요청을 Worker 가 먼저 받음 → http 요청을 https 로 강제 이동
+
+[triggers]
+crons = ["* * * * *", "0 19 * * *"]   # 매 분 답장 처리 / 매일 04:00 KST(=19:00 UTC) 유지 작업
+
+[vars]
+OWNER_NAME = "홍길동"
+SUPABASE_URL = "https://YOUR_PROJECT_REF.supabase.co"
+OWNER_UUID = "00000000-0000-0000-0000-000000000000"
+IG_API_BASE = "https://graph.instagram.com/v23.0"   # Meta 앱 대시보드 기준 버전으로
+CLAUDE_API_URL = "https://api.anthropic.com/v1/messages"
+CLAUDE_MODEL_REPLY = "claude-haiku-5-5"             # 품질이 아쉬우면 claude-sonnet-5-5
+CLAUDE_MODEL_SUMMARY = "claude-haiku-5-5"
+WORKER_BUDGET_SEC = "45"
+WEBHOOK_BUDGET_SEC = "20"
+LEASE_SEC = "120"
+MAX_ATTEMPTS = "5"
+REPLY_WINDOW_SEC = "86100"     # 24시간 - 여유 5분
+CONTEXT_MESSAGES = "12"            # 최근 대화 최대 줄 수 (마지막 대화 흐름만, 최소 6줄)
+MAX_SUBREQUESTS = "45"         # 무료 플랜: 실행 1회당 외부 호출 50회 제한 → 여유 두고 45
+INLINE_WORKER = "1"            # 웹훅 받은 직후 바로 처리 시도 (0 이면 크론만)
+FORCE_HTTPS = "1"              # http 접속을 https 로 이동 (로컬 테스트에서는 0)
+
+# 비밀값은 여기 쓰지 말고 `wrangler secret put` 으로 등록 (deploy-secrets.mjs 참고):
+# SUPABASE_SERVICE_KEY, IG_APP_SECRET, IG_VERIFY_TOKEN, CLAUDE_API_KEY, ENC_KEY_B64, IG_ACCESS_TOKEN

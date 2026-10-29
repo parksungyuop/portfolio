@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
+<title>JARVIS</title>
+<link rel="stylesheet" href="hud.css">
+</head>
+<body data-state="IDLE" data-mode="full">
+<!-- 오브(항상) -->
+<div class="orb" id="orb">
+  <svg viewBox="0 0 120 120">
+    <defs>
+      <radialGradient id="og" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff"/><stop offset="35%" stop-color="currentColor"/><stop offset="70%" stop-color="currentColor" stop-opacity=".25"/><stop offset="100%" stop-color="currentColor" stop-opacity="0"/></radialGradient>
+      <filter id="oglow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="1.5 6" opacity=".8" filter="url(#oglow)"/>
+    <g class="spin"><circle cx="60" cy="60" r="46" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="18 10" opacity=".85" filter="url(#oglow)"/></g>
+    <circle class="breathe" cx="60" cy="60" r="34" fill="none" stroke="currentColor" stroke-width="7" stroke-dasharray="2 5"/>
+    <circle cx="60" cy="60" r="20" fill="url(#og)" filter="url(#oglow)"/>
+    <circle cx="60" cy="60" r="8" fill="#fff" opacity=".9"/>
+  </svg>
+</div>
+<!-- 접힌 모드 패널 -->
+<div class="panel" id="panel">
+  <div class="name" id="name">JARVIS</div>
+  <div class="state" id="state"></div>
+  <div class="partial" id="partial"></div>
+  <div class="caption" id="caption"></div>
+  <div class="widget" id="widget"></div>
+</div>
+
+<!-- 전체 화면 관제 모드 -->
+<div class="cc" id="cc">
+  <div class="grid"></div><div class="vignette"></div>
+  <div class="br tl"></div><div class="br tr"></div><div class="br bl"></div><div class="br br2"></div>
+
+  <div class="top">
+    <div class="row"><span class="dot" id="dot"></span><span class="col"><span class="brand" id="cname">JARVIS</span><span class="lbl step" id="cstate"></span></span></div>
+    <div class="row gauges">
+      <div class="g"><span class="lbl">시각</span><span class="big" id="clock">--:--:--</span></div>
+      <div class="g"><span class="lbl">날짜</span><span class="mid" id="date"></span></div>
+      <div class="g"><span class="lbl">마이크</span><span class="mid" id="mic">—</span></div>
+      <div class="g"><span class="lbl">목소리</span><span class="mid" id="voice">—</span></div>
+    </div>
+  </div>
+  <div class="ticks"></div>
+
+  <!-- 메뉴 레일 -->
+  <nav class="rail" id="rail">
+    <button class="rb on" data-pane="ops" title="관제"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg><span>관제</span></button>
+    <button class="rb" data-pane="settings" title="설정"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 12h2M10 12h10M4 17h8M16 17h4"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="12" r="2"/><circle cx="14" cy="17" r="2"/></svg><span>설정</span></button>
+    <button class="rb" data-pane="links" title="연결"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>연결</span></button>
+    <button class="rb" data-pane="log" title="기록"><svg viewBox="0 0 24 24"><path d="M5 4h14v16H5z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span>기록</span></button>
+    <button class="rb" id="alwaysbtn" data-always="toggle" title="항상 듣기 켜기/끄기 (호출 없이 모든 말을 듣습니다)"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/><path d="M2 8c1-2 1-4 0-6M22 8c-1-2-1-4 0-6"/></svg><span>항상</span></button>
+    <button class="rb" data-assistant="next" title="다음 비서로 바꾸기"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M17 7l3 3-3 3M20 10h-6"/></svg><span>비서</span></button>
+    <button class="rb mute" data-mute="sleep" title="대화 끝내고 화면 닫기"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M4 4l16 16"/></svg><span>닫기</span></button>
+  </nav>
+
+  <!-- 설정 -->
+  <section class="pane" id="pane-settings">
+    <div class="ph"><span class="lbl">설정</span><span class="unit" id="savestate"></span></div>
+    <form id="sform" class="form" autocomplete="off">
+      <label><span class="unit">비서 이름 (화면에 표시)</span><input name="displayName" maxlength="20"></label>
+      <label><span class="unit">목소리 서비스 열쇠 (ElevenLabs API 키) <em id="keystate"></em></span><input name="key" type="password" placeholder="sk_로 시작하는 값. 저장하면 이 칸은 비워집니다"></label>
+      <label><span class="unit">목소리 코드 (ElevenLabs Voice ID)</span><input name="voiceId" maxlength="20"></label>
+      <label><span class="unit">"헤이 자비스" 민감도 <b id="thrv"></b> — 왼쪽일수록 잘 알아듣고 오작동도 늘어남</span><input name="wakeThreshold" type="range" min="0.2" max="0.95" step="0.05"></label>
+      <label><span class="unit">말이 끝났다고 보기까지 기다리는 시간 (초)</span><input name="endpointS" type="number" min="0.3" max="3" step="0.1"></label>
+      <label><span class="unit">대답한 뒤 부르지 않아도 계속 듣는 시간 (초)</span><input name="followUpS" type="number" min="0" max="60" step="1"></label>
+      <label><span class="unit">대화가 끝난 뒤 화면을 남겨 두는 시간 (초)</span><input name="hudHoldS" type="number" min="0" max="600" step="10"></label>
+      <label><span class="unit">날씨를 볼 도시 (비우면 현재 위치를 자동으로 찾음)</span><input name="city" maxlength="40"></label>
+      <label class="chk"><input name="clap" type="checkbox"><span class="unit">박수 두 번으로 부르기</span></label>
+      <label><span class="unit">박수 민감도 <b id="clapv"></b> — 오른쪽일수록 작은 박수도 잡고 오작동도 늘어남</span><input name="clapSensitivity" type="range" min="0" max="1" step="0.05"></label>
+      <label class="chk"><input name="captions" type="checkbox"><span class="unit">말한 내용과 대답을 글자로도 보여주기</span></label>
+      <div class="actions"><button type="submit" class="btn">저장하기</button></div>
+    </form>
+  </section>
+
+  <!-- 연결 -->
+  <section class="pane" id="pane-links">
+    <div class="ph"><span class="lbl">연결</span></div>
+    <ul class="links" id="links"></ul>
+    <div class="actions"><button class="btn" id="calbtn" type="button">캘린더 접근 허용하기</button></div>
+  </section>
+
+  <!-- 기록 -->
+  <section class="pane" id="pane-log">
+    <div class="ph"><span class="lbl">기록</span><span class="unit">이번 실행</span></div>
+    <ul class="log" id="loglist"></ul>
+  </section>
+
+  <div class="reticle">
+    <canvas id="sphere"></canvas>
+    <div class="rlabel"><span class="lbl" id="rstate"></span><span class="unit" id="rsub"></span></div>
+  </div>
+
+  <div class="pnl left1">
+    <div class="hd"><span class="lbl">귀 · 마이크</span><span class="unit">16 kHz</span></div>
+    <div class="meter"><div class="kv"><span class="unit">입력 레벨</span><span class="sm" id="micdb">—</span></div><div class="bar"><i id="micbar"></i></div></div>
+    <div class="meter"><div class="kv"><span class="unit">호출어 점수 · 임계 <span id="thr">0.50</span></span><span class="sm" id="wake">—</span></div><div class="bar"><i id="wakebar"></i></div></div>
+    <div class="kv foot"><span class="unit">최근 호출</span><span class="sm" id="lastwake">—</span></div>
+  </div>
+  <div class="pnl left2">
+    <div class="hd"><span class="lbl">인식 · ko-KR</span><span class="unit">온디바이스</span></div>
+    <div class="stt" id="cpartial"></div>
+    <div class="row2"><div class="g"><span class="unit">부분 결과</span><span class="mid" id="npartial">0</span></div><div class="g"><span class="unit">마지막 확정</span><span class="mid" id="sttms">—</span></div></div>
+  </div>
+  <div class="pnl right1">
+    <div class="hd"><span class="lbl">두뇌 · Claude</span><span class="ok" id="bstat">—</span></div>
+    <div class="row2"><div class="g"><span class="unit">첫 문장까지</span><span class="val" id="brainms">—</span></div><div class="g"><span class="unit">이번 세션 대화</span><span class="val" id="turns">0</span></div></div>
+    <div class="kv foot"><span class="unit">세션</span><span class="sm" id="sess">—</span></div>
+    <div class="kv"><span class="unit">도구</span><span class="sm" id="tool">없음 (잡담)</span></div>
+  </div>
+  <div class="pnl right2">
+    <div class="hd"><span class="lbl">입 · 음성</span><span class="unit" id="ttsmodel">—</span></div>
+    <div class="row2"><div class="g"><span class="unit">첫 오디오</span><span class="val" id="ttsms">—</span></div><div class="g"><span class="unit">큐</span><span class="val" id="queue">0</span></div></div>
+    <div class="bars" id="bars"></div>
+    <div class="kv foot"><span class="unit">폴백</span><span class="sm" id="fallback">Yuna 대기</span></div>
+  </div>
+
+  <div class="band">
+    <svg width="96" height="28" viewBox="0 0 96 28"><path d="M0 0 L14 14 L0 28 M18 0 L32 14 L18 28 M36 0 L50 14 L36 28 M54 0 L68 14 L54 28 M72 0 L86 14 L72 28" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+    <div class="bandbox"><div class="bcaption" id="bcaption"></div></div>
+    <svg width="96" height="28" viewBox="0 0 96 28"><path d="M96 0 L82 14 L96 28 M78 0 L64 14 L78 28 M60 0 L46 14 L60 28 M42 0 L28 14 L42 28 M24 0 L10 14 L24 28" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+  </div>
+</div>
+<input class="cmd" id="cmd" placeholder="명령을 입력하고 Enter" maxlength="500" autocomplete="off">
+<script src="hud.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "composite": false,
+    "declaration": false,
+    "lib": [
+      "ES2023",
+      "DOM"
+    ]
+  },
+  "include": [
+    "spike-hud/**/*.ts",
+    "spike-hud/**/*.cts",
+    "main/**/*.ts",
+    "voice/**/*.ts",
+    "brain/**/*.ts",
+    "windows/**/*.ts",
+    "preload.cts"
+  ]
+}

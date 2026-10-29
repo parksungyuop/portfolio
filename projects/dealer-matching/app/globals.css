@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* 숨고 스타일 토큰. 흰 바탕 · 검정 텍스트 · 블루 강조 · Pretendard. 밝은 테마가 기본. */
+:root {
+  --bg: #ffffff; --bg2: #f7f8fa; --surface: #ffffff; --surface2: #f2f4f6;
+  --line: #e8ebef; --line2: #d5dae0;
+  --text: #191f28; --muted: #6b7684; --dim: #8b95a1;
+  --accent: #2d6bff; --accent2: #1f55d6; --accent-fill: #2d6bff; --accent-ink: #ffffff;
+  --accent-soft: #eaf1ff; --accent-light: #9dbcff;
+  --strong: #191f28;
+  --gold: #ffb300; --ok: #12b886; --warn: #f59f00; --bad: #f03e3e;
+  --scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #111418; --bg2: #181c22; --surface: #1c2128; --surface2: #262c35;
+  --line: #2c333d; --line2: #3a424e;
+  --text: #f1f3f5; --muted: #a9b1bc; --dim: #7c8591;
+  --accent: #6b9bff; --accent2: #8fb3ff; --accent-fill: #2d6bff; --accent-ink: #ffffff;
+  --accent-soft: #1e2f55; --accent-light: #3d5a99;
+  --strong: #f1f3f5;
+  --gold: #ffc107; --ok: #3ddc97; --warn: #ffb74d; --bad: #ff6b6b;
+  --scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg); --color-bg2: var(--bg2); --color-surface: var(--surface); --color-surface2: var(--surface2);
+  --color-line: var(--line); --color-line2: var(--line2);
+  --color-text: var(--text); --color-muted: var(--muted); --color-dim: var(--dim);
+  --color-accent: var(--accent); --color-accent2: var(--accent2); --color-accent-soft: var(--accent-soft);
+  --color-strong: var(--strong);
+  --color-gold: var(--gold); --color-ok: var(--ok); --color-warn: var(--warn); --color-bad: var(--bad);
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "Pretendard Variable", Pretendard, sans-serif;
+}
+
+@layer components {
+html { color-scheme: var(--scheme); }
+body { background: var(--bg); color: var(--text); font-family: var(--font-sans); font-weight: 400; font-size: 15px; line-height: 1.55; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; }
+::selection { background: var(--accent-soft); }
+h1, h2, h3, .serif { font-family: var(--font-sans); font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+.mono { font-variant-numeric: tabular-nums; }
+a { color: inherit; }
+strong, b { font-weight: 700; color: var(--text); }
+
+/* 앱 셸 */
+.shell { max-width: 480px; margin: 0 auto; min-height: 100dvh; padding: 0 20px 96px; }
+.hdr { display: flex; align-items: center; justify-content: space-between; padding: 18px 0 14px; }
+.hdr h1 { font-size: 22px; font-weight: 800; color: var(--text); }
+.big { font-size: 22px; font-weight: 800; color: var(--text); line-height: 1.3; letter-spacing: -0.02em; }
+
+/* 카드 */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: block; }
+.card-hi { border-color: var(--accent-light); background: color-mix(in srgb, var(--accent-soft) 55%, var(--surface)); }
+.divider { border: 0; border-top: 1px solid var(--line); margin: 12px 0; }
+
+/* 버튼 */
+.btn { font-weight: 700; font-size: 15px; padding: 14px 18px; border-radius: 12px; border: 1px solid transparent; display: inline-flex; align-items: center; justify-content: center; gap: 6px; line-height: 1.2; cursor: pointer; text-decoration: none; letter-spacing: -0.01em; }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.btn-pri { background: var(--accent-fill); color: var(--accent-ink); }
+.btn-pri:hover { background: var(--accent2); }
+.btn-wine { background: var(--strong); color: var(--bg); }
+.btn-ghost { border-color: var(--line2); color: var(--text); background: var(--surface); }
+.btn-soft { background: var(--accent-soft); color: var(--accent); }
+.btn-sm { font-size: 13px; padding: 9px 14px; border-radius: 10px; }
+.btn-full { width: 100%; }
+
+/* 칩 · 배지 */
+.chip { font-size: 13px; font-weight: 500; padding: 7px 12px; border-radius: 99px; border: 1px solid transparent; background: var(--surface2); color: var(--muted); display: inline-flex; align-items: center; line-height: 1.3; cursor: pointer; white-space: nowrap; }
+.chip-on, .chip:has(input:checked) { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+.chip-urgent { background: #fff0f0; color: var(--bad); }
+:root[data-theme="dark"] .chip-urgent { background: #3a1f24; }
+.chip input { position: absolute; opacity: 0; width: 0; height: 0; }
+.badge { font-size: 11.5px; font-weight: 600; padding: 3px 7px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.badge-gold { background: #fff6dd; color: #b47d00; }
+.badge-bad { background: #fff0f0; color: var(--bad); }
+.badge-ok { background: #e6f9f2; color: #0f8f6a; }
+.badge-warn { background: #fff5e0; color: #b46f00; }
+.badge-mute { background: var(--surface2); color: var(--muted); }
+:root[data-theme="dark"] .badge-gold, :root[data-theme="dark"] .badge-bad, :root[data-theme="dark"] .badge-ok, :root[data-theme="dark"] .badge-warn { background: var(--surface2); }
+.stars { color: var(--gold); letter-spacing: 0; font-size: 13px; }
+.pay { font-weight: 800; color: var(--text); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.k { color: var(--dim); font-size: 13px; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-soft); flex: none; display: grid; place-items: center; font-weight: 800; color: var(--accent); font-size: 15px; }
+.avatar-sq { border-radius: 10px; }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 14px; }
+.kv > :nth-child(odd) { color: var(--dim); }
+.kv > :nth-child(even) { color: var(--text); }
+
+/* 폼 */
+label.lbl { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin: 18px 0 6px; }
+.input, input[type=text], input[type=number], input[type=date], input[type=time], input[type=tel], input[type=url], select, textarea {
+  width: 100%; background: var(--surface); border: 1px solid var(--line2); border-radius: 10px; padding: 13px 14px; color: var(--text); font-size: 15px; font-family: inherit;
+}
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.btn:focus-visible, .chip:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.seg { display: flex; background: var(--surface2); border-radius: 12px; padding: 4px; gap: 4px; }
+.seg label, .seg a { flex: 1; text-align: center; padding: 9px; border-radius: 9px; color: var(--muted); font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; }
+.seg label:has(input:checked), .seg a.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.seg input { display: none; }
+.bar { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); border-radius: 3px; }
+
+/* 채팅 */
+.bub { max-width: 82%; padding: 10px 14px; border-radius: 18px; font-size: 15px; line-height: 1.45; }
+.bub-me { align-self: flex-end; background: var(--accent-fill); color: #fff; border-bottom-right-radius: 4px; }
+.bub-them { align-self: flex-start; background: var(--surface2); border-bottom-left-radius: 4px; }
+.offer { align-self: flex-start; width: 90%; background: var(--surface); border: 1.5px solid var(--accent); border-radius: 16px; padding: 14px 16px; }
+.offer-me { align-self: flex-end; }
+
+/* 하단 탭 */
+.tabs { position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line); }
+.tabs > div { max-width: 480px; margin: 0 auto; display: flex; }
+.tabs a { flex: 1; text-align: center; padding: 12px 0 18px; font-size: 11px; font-weight: 600; color: var(--dim); text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.tabs a svg { width: 22px; height: 22px; }
+.tabs a.on { color: var(--accent); }
+
+/* 별점 입력 */
+.rate { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 2px; }
+.rate input { display: none; }
+.rate label { color: var(--line2); font-size: 26px; cursor: pointer; }
+.rate input:checked ~ label, .rate label:hover, .rate label:hover ~ label { color: var(--gold); }
+
+/* 하단 고정 CTA */
+.cta { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 20px 20px; background: var(--surface); border-top: 1px solid var(--line); }
+.cta > div { max-width: 480px; margin: 0 auto; }
+}

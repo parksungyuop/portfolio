@@ -1,0 +1,22 @@
+# brainstorm mockups (visual companion)
+.superpowers/
+# deps / build
+node_modules/
+dist/
+out/
+.cache/
+*.tsbuildinfo
+# secrets — never commit
+.env
+.env.*
+secrets/
+*.enc
+# local state
+.DS_Store
+*.log
+# seeded design canvas (2MB payload; working files stay)
+design/jarvis-hud-design.html
+dist/
+native/jarvis-ear/build/
+models/*.onnx
+fixtures/wake/negative-*.wav

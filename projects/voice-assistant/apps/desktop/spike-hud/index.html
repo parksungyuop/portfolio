@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
+<title>jarvis hud spike</title>
+<style>
+  html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; }
+  .core { position: absolute; left: 50%; top: 44%; width: 432px; height: 432px; transform: translate(-50%, -50%); }
+  .core svg { width: 100%; height: 100%; overflow: visible; }
+  /* transform / opacity 만 애니메이션한다 (명세 §7.3) */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes spinr { to { transform: rotate(-360deg); } }
+  @keyframes breathe { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+  .spin { transform-origin: 50% 50%; animation: spin 24s linear infinite; will-change: transform; }
+  .spinr { transform-origin: 50% 50%; animation: spinr 9s linear infinite; will-change: transform; }
+  .breathe { animation: breathe 2s ease-in-out infinite; will-change: opacity; }
+  .orb { position: absolute; right: 44px; bottom: 44px; width: 96px; height: 96px; }
+  .label { position: absolute; left: 0; right: 0; top: 70%; text-align: center; color: #8ed9ff; font: 600 13px/1 -apple-system, sans-serif; letter-spacing: 3px; }
+</style>
+</head>
+<body>
+<div class="core">
+  <svg viewBox="0 0 432 432">
+    <defs>
+      <radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fff"/><stop offset="32%" stop-color="#34e1ff"/><stop offset="68%" stop-color="#34e1ff" stop-opacity=".2"/><stop offset="100%" stop-color="#34e1ff" stop-opacity="0"/></radialGradient>
+      <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <circle cx="216" cy="216" r="210" fill="none" stroke="#34e1ff" stroke-width="3" stroke-dasharray="1.5 9.5" opacity=".9" filter="url(#glow)"/>
+    <g class="spin"><circle cx="216" cy="216" r="186" fill="none" stroke="#34e1ff" stroke-width="2" stroke-dasharray="24 14" opacity=".4"/></g>
+    <circle cx="216" cy="216" r="164" fill="none" stroke="#34e1ff" stroke-width="1.5" opacity=".25"/>
+    <g class="spinr"><circle cx="216" cy="216" r="148" fill="none" stroke="#34e1ff" stroke-width="5" stroke-dasharray="54 28" opacity=".9" filter="url(#glow)"/></g>
+    <circle class="breathe" cx="216" cy="216" r="122" fill="none" stroke="#34e1ff" stroke-width="16" stroke-dasharray="2.5 7.5"/>
+    <circle cx="216" cy="216" r="70" fill="url(#g)" filter="url(#glow)"/>
+    <circle cx="216" cy="216" r="30" fill="#fff" opacity=".9"/>
+  </svg>
+</div>
+<div class="label">HUD SPIKE · <span id="left"></span>s</div>
+<script>
+  const seconds = Number(new URLSearchParams(location.search).get('seconds') || '60')
+  const left = document.getElementById('left')
+  let frames = 0, t0 = performance.now(), last = t0
+  function tick(now) {
+    frames++
+    if (now - last > 500) { left.textContent = Math.max(0, Math.ceil(seconds - (now - t0) / 1000)); last = now }
+    if (now - t0 >= seconds * 1000) {
+      const avg = frames / ((now - t0) / 1000)
+      window.jarvis.reportFps(avg, frames)
+      return
+    }
+    requestAnimationFrame(tick)
+  }
+  requestAnimationFrame(tick)
+</script>
+</body>
+</html>

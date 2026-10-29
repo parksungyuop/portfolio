@@ -1,0 +1,203 @@
+// 딜러매칭 MVP 스키마. 로컬은 SQLite, 배포는 provider만 postgresql로 바꾼다.
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  phone     String   @unique
+  name      String
+  birthDate DateTime? // 가게 계정은 없음
+  role      String // DEALER | STORE
+  createdAt DateTime @default(now())
+
+  dealer   DealerProfile?
+  store    StoreProfile?
+  messages Message[]
+  offers   Offer[]
+  reports  Report[]       @relation("reporter")
+}
+
+model DealerProfile {
+  id               String @id @default(cuid())
+  userId           String @unique
+  user             User   @relation(fields: [userId], references: [id])
+  nickname         String
+  gender           String // F | M
+  age              Int
+  neighborhood     String
+  preferredRegions String // "강남,홍대"
+  years            Int
+  games            String // "NLH,PLO"
+  cert             String?
+  videoUrl         String?
+  workCount        Int    @default(0)
+  noShowCount      Int    @default(0)
+  lateCancels      Int    @default(0)
+
+  applications Application[]
+  matches      Match[]
+  rooms        ChatRoom[]
+  reviews      Review[]      @relation("dealerTarget")
+}
+
+model StoreProfile {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id])
+  name          String
+  bizNo         String?
+  region        String
+  address       String
+  tables        Int
+  games         String
+  blinds        String
+  hours         String
+  subscribed    Boolean   @default(false)
+  credits       Int       @default(10000) // 첫 2건 무료 = 게재비 5,000 × 2
+  reportCount   Int       @default(0)
+  lateCancels   Int       @default(0)
+  sanctionUntil DateTime?
+
+  posts   JobPost[]
+  matches Match[]
+  rooms   ChatRoom[]
+  reviews Review[]  @relation("storeTarget")
+}
+
+model JobPost {
+  id         String   @id @default(cuid())
+  storeId    String
+  store      StoreProfile @relation(fields: [storeId], references: [id])
+  startsAt   DateTime
+  endsAt     DateTime
+  hourlyWage Int
+  headcount  Int      @default(1)
+  genderPref String   @default("ANY") // ANY | F | M  (기능 플래그 PREF_FIELDS)
+  agePref    String   @default("") // "20대,30대"
+  minYears   Int      @default(0)
+  notes      String   @default("")
+  status     String   @default("OPEN") // OPEN CONFIRMED COMPLETED CANCELLED EXPIRED
+  createdAt  DateTime @default(now())
+
+  applications Application[]
+  matches      Match[]
+}
+
+model Application {
+  id        String        @id @default(cuid())
+  postId    String
+  post      JobPost       @relation(fields: [postId], references: [id])
+  dealerId  String
+  dealer    DealerProfile @relation(fields: [dealerId], references: [id])
+  message   String        @default("")
+  askedWage Int? // 견적 시급. 없으면 공고 시급
+  status    String        @default("APPLIED") // APPLIED ACCEPTED REJECTED
+  createdAt DateTime      @default(now())
+
+  @@unique([postId, dealerId])
+}
+
+model Match {
+  id          String        @id @default(cuid())
+  postId      String?
+  post        JobPost?      @relation(fields: [postId], references: [id])
+  dealerId    String
+  dealer      DealerProfile @relation(fields: [dealerId], references: [id])
+  storeId     String
+  store       StoreProfile  @relation(fields: [storeId], references: [id])
+  startsAt    DateTime
+  endsAt      DateTime
+  hourlyWage  Int
+  status      String        @default("CONFIRMED") // CONFIRMED COMPLETED CANCELLED NO_SHOW
+  cancelledBy String?
+  confirmedAt DateTime      @default(now())
+  completedAt DateTime?
+
+  reviews    Review[]
+  noShowCase NoShowCase?
+}
+
+model Review {
+  id         String        @id @default(cuid())
+  matchId    String
+  match      Match         @relation(fields: [matchId], references: [id])
+  authorRole String // DEALER (→가게) | STORE (→딜러)
+  dealerId   String?
+  dealer     DealerProfile? @relation("dealerTarget", fields: [dealerId], references: [id])
+  storeId    String?
+  store      StoreProfile?  @relation("storeTarget", fields: [storeId], references: [id])
+  scores     String // JSON {"pay":5,"mood":4,...}
+  tags       String @default("")
+  createdAt  DateTime @default(now())
+
+  @@unique([matchId, authorRole])
+}
+
+model NoShowCase {
+  id          String    @id @default(cuid())
+  matchId     String    @unique
+  match       Match     @relation(fields: [matchId], references: [id])
+  reportedAt  DateTime  @default(now())
+  deadline    DateTime
+  defenseText String?
+  outcome     String    @default("PENDING") // PENDING AUTO_CONFIRMED DISPUTED DISMISSED
+}
+
+model ChatRoom {
+  id        String        @id @default(cuid())
+  dealerId  String
+  dealer    DealerProfile @relation(fields: [dealerId], references: [id])
+  storeId   String
+  store     StoreProfile  @relation(fields: [storeId], references: [id])
+  updatedAt DateTime      @updatedAt
+
+  messages Message[]
+  offers   Offer[]
+
+  @@unique([dealerId, storeId])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  roomId    String
+  room      ChatRoom @relation(fields: [roomId], references: [id])
+  senderId  String
+  sender    User     @relation(fields: [senderId], references: [id])
+  body      String
+  offerId   String?  @unique
+  offer     Offer?   @relation(fields: [offerId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Offer {
+  id         String   @id @default(cuid())
+  roomId     String
+  room       ChatRoom @relation(fields: [roomId], references: [id])
+  fromUserId String
+  from       User     @relation(fields: [fromUserId], references: [id])
+  startsAt   DateTime
+  endsAt     DateTime
+  hourlyWage Int
+  memo       String   @default("")
+  status     String   @default("PENDING") // PENDING ACCEPTED DECLINED
+  createdAt  DateTime @default(now())
+
+  message Message?
+}
+
+model Report {
+  id           String   @id @default(cuid())
+  reporterId   String
+  reporter     User     @relation("reporter", fields: [reporterId], references: [id])
+  targetUserId String
+  type         String // UNPAID ABUSE ETC
+  detail       String
+  status       String   @default("PENDING") // PENDING ACCEPTED DISMISSED
+  createdAt    DateTime @default(now())
+}

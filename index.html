@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>포트폴리오</title>
+<meta name="description" content="기획부터 디자인, 개발, 배포까지 혼자 끝내는 개발자의 작업 모음">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --bg:#f6f5f2; --surface:#fff; --ink:#16171a; --muted:#6b6e76; --line:#e4e2dc;
+  --accent:#e2462f; --accent-ink:#fff; --chip:#efede7; --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111214; --surface:#1a1b1f; --ink:#ecebe8; --muted:#9a9ca3; --line:#2a2c31;
+  --accent:#ff6a52; --chip:#24262b; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --bg:#111214; --surface:#1a1b1f; --ink:#ecebe8; --muted:#9a9ca3; --line:#2a2c31;
+  --accent:#ff6a52; --chip:#24262b; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 Pretendard,system-ui,sans-serif;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+@media (max-width:600px){.wrap{padding:0 16px}}
+
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:24px;height:56px}
+nav b{font-weight:800;letter-spacing:-.02em}
+nav ul{display:flex;gap:20px;list-style:none;padding:0;margin-left:auto;font-size:14px;color:var(--muted)}
+nav a{text-decoration:none}
+nav a:hover{color:var(--ink)}
+@media (max-width:600px){nav ul{gap:12px;font-size:13px}}
+
+header{padding:96px 0 72px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.15;letter-spacing:-.035em;font-weight:800;margin:16px 0 24px}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:640px}
+.stats{display:flex;flex-wrap:wrap;gap:40px;margin-top:48px}
+.stats div{font-size:14px;color:var(--muted)}
+.stats strong{display:block;font-size:32px;color:var(--ink);font-weight:800;letter-spacing:-.02em}
+
+section{padding:72px 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:40px}
+h2{font-size:30px;letter-spacing:-.03em;font-weight:800}
+.sec-head p{color:var(--muted);font-size:15px}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+.card{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.card.wide{grid-column:1/-1}
+.shot{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--chip);cursor:zoom-in;border:0;padding:0;width:100%;display:block}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .4s}
+.shot:hover img{transform:scale(1.02)}
+.shot.dark{background:#0b0d12}
+.shot.dark img{object-fit:contain;filter:invert(1) hue-rotate(180deg)}
+.shot.fit img{object-fit:contain;object-position:center}
+.shot.pet{background:#f5f3ee}
+.shot.pair{display:grid;grid-template-columns:2.6fr 1fr;gap:8px;padding:8px;cursor:default}
+.shot.pair button{border:0;padding:0;background:none;cursor:zoom-in;overflow:hidden;border-radius:8px}
+.shot.pair img{border-radius:8px;object-position:left top}
+.shot.duo{display:grid;grid-template-columns:1.35fr 1fr;gap:8px;padding:8px;cursor:default;aspect-ratio:auto;height:380px}
+.shot.quad{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;padding:8px;cursor:default;aspect-ratio:auto;height:460px}
+.shot.duo button,.shot.quad button{border:0;padding:0;background:none;cursor:zoom-in;overflow:hidden;border-radius:8px;min-width:0}
+.shot.duo img,.shot.quad img{border-radius:8px;object-position:left top}
+@media (max-width:600px){.shot.duo{grid-template-columns:1fr;height:auto}.shot.duo button{aspect-ratio:4/3}.shot.quad{height:300px}}
+.modules{margin-top:8px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.modules h4{font-size:16px;font-weight:700;letter-spacing:-.01em}
+.pipeline{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;counter-reset:st}
+.pipeline li{counter-increment:st;background:var(--chip);border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--muted);line-height:1.45}
+.pipeline li::before{content:counter(st);display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:700;margin-bottom:6px}
+.pipeline b{display:block;color:var(--ink);font-size:13.5px}
+.mod-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;align-items:start}
+.mod-grid dl{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:13.5px}
+.mod-grid dt{white-space:nowrap}
+.mod-grid dd{margin:0;color:var(--muted)}
+.mod-grid code,.body code{font:12.5px ui-monospace,Consolas,monospace;background:var(--chip);padding:1px 6px;border-radius:5px}
+.mod-shot{border:1px solid var(--line);border-radius:10px;overflow:hidden;padding:0;background:#fff;cursor:zoom-in;height:340px}
+.mod-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+@media (max-width:820px){.pipeline{grid-template-columns:repeat(2,1fr)}.mod-grid{grid-template-columns:1fr}.mod-grid dl{grid-template-columns:1fr;gap:2px}.mod-grid dd{margin-bottom:8px}.mod-grid dt{white-space:normal}}
+.shot.row{display:flex;gap:8px;padding:12px;cursor:default;aspect-ratio:auto;height:320px}
+.shot.row button{flex:1;border:0;padding:0;background:none;cursor:zoom-in;overflow:hidden;border-radius:8px;min-width:0}
+.body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.body h3{font-size:20px;letter-spacing:-.02em;font-weight:700}
+.body .sub{font-size:13px;color:var(--muted);font-weight:600}
+.body p{font-size:15px;color:var(--muted)}
+.body ul{padding-left:18px;font-size:14px;color:var(--muted)}
+.body li{margin:2px 0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+.tags span{font-size:12px;font-weight:600;background:var(--chip);border-radius:999px;padding:4px 10px}
+.links{display:flex;gap:16px;font-size:14px;font-weight:700}
+.links a{color:var(--accent);text-decoration:none}
+.links a:hover{text-decoration:underline}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--chip);color:var(--muted);margin-left:8px;vertical-align:middle}
+
+pre.diagram{font:12.5px/1.55 ui-monospace,Consolas,monospace;background:var(--chip);border-radius:10px;padding:16px;overflow-x:auto;color:var(--ink)}
+
+.illust{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+@media (max-width:820px){.illust{grid-template-columns:repeat(2,1fr)}}
+.illust button{border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:0;background:var(--surface);cursor:zoom-in;aspect-ratio:3/4.4}
+.illust img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+
+footer{padding:64px 0 96px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer h2{color:var(--ink);margin-bottom:12px}
+
+dialog{border:0;padding:0;background:transparent;max-width:min(1200px,94vw);max-height:92vh}
+dialog::backdrop{background:rgba(0,0,0,.82)}
+dialog img{display:block;max-width:100%;max-height:92vh;object-fit:contain;border-radius:8px;margin:auto}
+dialog .scroll{max-height:92vh;overflow:auto;border-radius:8px}
+dialog .scroll img{max-height:none}
+.theme{margin-left:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:4px 10px;font:inherit;font-size:13px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <b>Portfolio</b>
+  <ul>
+    <li><a href="#products">개인 프로젝트</a></li>
+    <li><a href="#client">외주 작업</a></li>
+    <li><a href="#illust">일러스트</a></li>
+  </ul>
+  <button class="theme" id="theme" aria-label="화면 테마 전환">◐</button>
+</div></nav>
+
+<header class="wrap">
+  <div class="eyebrow">Planner · Designer · Builder</div>
+  <h1>기획서 한 장에서<br><em>돌아가는 서비스</em>까지.</h1>
+  <p class="lead">사업 기획, UI 디자인, 프론트·백엔드 개발, 배포까지 혼자 끝냅니다. AI 에이전트를 도구로 써서 아이디어가 제품이 되는 시간을 줄이는 데 집중합니다.</p>
+  <div class="stats">
+    <div><strong>6</strong>개인 프로젝트</div>
+    <div><strong>5</strong>외주 프로젝트</div>
+    <div><strong>Web · Android · Desktop</strong>플랫폼</div>
+  </div>
+</header>
+
+<!-- ───────── 개인 프로젝트 ───────── -->
+<section id="products"><div class="wrap">
+  <div class="sec-head"><h2>개인 프로젝트</h2><p>기획부터 개발까지 직접 만든 제품</p></div>
+  <div class="grid">
+
+    <article class="card wide">
+      <div class="shot pair">
+        <button data-src="assets/sparring-desktop.webp"><img src="assets/sparring-desktop.webp" alt="스파링 매칭 웹 데스크톱 로그인 화면" loading="lazy"></button>
+        <button data-src="assets/sparring-mobile.webp"><img src="assets/sparring-mobile.webp" alt="스파링 매칭 웹 모바일 화면" loading="lazy"></button>
+      </div>
+      <div class="body">
+        <div class="sub">스파링 파트너 매칭 · 커뮤니티 웹 베타</div>
+        <h3>스파링 매칭 웹</h3>
+        <p>격투기 하는 사람들이 같은 종목, 비슷한 체급, 맞는 강도의 파트너를 찾아 서로 동의하고 운동 약속을 잡는 서비스입니다. 카드 탐색, 제안, 상호 수락, 대화로 이어지는 소개팅 앱의 매칭 흐름을 운동 파트너 찾기에 맞게 바꿨습니다.</p>
+        <ul>
+          <li>영화 포스터 5종을 무드 레퍼런스로 삼아 만든 "네온 &amp; 그레인" 비주얼 시스템 v2</li>
+          <li>받은 스파링 요청함에서 수락하면 대화방이 자동으로 생기고, 배지 숫자가 실시간으로 바뀝니다</li>
+          <li>만 15세 이상 확인, 위치·연락처 기본 보호 같은 안전 장치를 기본으로 넣었습니다</li>
+          <li>사업기획서와 제품 개발 계획서까지 직접 작성했습니다</li>
+        </ul>
+        <div class="tags"><span>Vanilla JS</span><span>Node.js 내장 서버</span><span>JSON 저장소</span><span>디자인 시스템</span><span>사업기획</span></div>
+        <div class="links"><a href="https://github.com/parksungyuop/portfolio/tree/main/projects/sparring-match">코드 보기 →</a></div>
+      </div>
+    </article>
+
+    <article class="card wide">
+      <div class="shot duo">
+        <button data-src="assets/dmbot-contacts.webp"><img src="assets/dmbot-contacts.webp" alt="DM 자동답변 봇 대시보드 상대 목록" loading="lazy"></button>
+        <button data-src="assets/dmbot-tone.webp"><img src="assets/dmbot-tone.webp" alt="DM 자동답변 봇 말투 프로필" loading="lazy"></button>
+      </div>
+      <div class="body">
+        <div class="sub">인스타그램 DM 자동답변 봇</div>
+        <h3>DM 자동답변 봇</h3>
+        <p>공식 Instagram API로 DM을 받고, 계정 주인의 말투를 학습한 Claude가 대신 답장합니다. 공유 호스팅에서도 돌아가도록 PHP 의존성을 0개로 맞췄습니다.</p>
+<pre class="diagram">Instagram ─webhook─▶ webhook.php ─▶ Supabase queue
+                                         ▲
+cron(1분) ─▶ worker ─ claim_jobs() ─▶ Claude ─▶ ig_send()
+대시보드 ─JWT + RLS─▶ Supabase</pre>
+        <ul>
+          <li>같은 DM이 두 번 나가지 않도록 4중으로 막았습니다: flock, DB 임대, UNIQUE 제약, 발송 중 상태 선기록</li>
+          <li>상대마다 말투 프로필(존댓말 비율, 평균 길이)을 따로 두고, 내가 직접 대화 중이면 봇이 알아서 일시정지합니다</li>
+          <li>약속 잡기와 알림, 대화 학습 메모리, Claude 사용량 집계까지 대시보드에서 관리합니다</li>
+          <li><code>FOR UPDATE SKIP LOCKED</code> 대기열로 크론이 겹쳐 실행돼도 문제가 없습니다</li>
+          <li>메시지 원문은 AES-256-GCM으로 암호화하고, 발송을 끄는 스위치는 코드 한 곳에서만 확인합니다</li>
+        </ul>
+        <div class="tags"><span>PHP 8</span><span>Supabase Postgres</span><span>Claude API</span><span>Vite</span></div>
+        <div class="links"><a href="https://github.com/parksungyuop/portfolio/tree/main/projects/dm-autoreply-bot">코드 보기 →</a></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="assets/dealer-desktop.webp"><img src="assets/dealer-desktop.webp" alt="딜러 매칭 플랫폼 첫 화면" loading="lazy"></button>
+      <div class="body">
+        <div class="sub">홀덤펍 딜러 매칭 플랫폼 MVP</div>
+        <h3>딜러 매칭 플랫폼</h3>
+        <p>사업계획서 v1.1의 MVP 범위를 그대로 동작하는 웹앱으로 만들었습니다. 가게가 요청을 올리면 딜러가 견적을 보내고, 가게가 비교해서 확정하는 숨고 방식의 흐름입니다.</p>
+        <ul>
+          <li>견적을 확정하면 매치 생성, 나머지 견적 마감, 요청 상태 변경이 하나의 트랜잭션으로 처리됩니다</li>
+          <li>미출근 신고가 들어오면 24시간 소명 기간을 주고, 기간이 지나면 노쇼가 자동 확정됩니다</li>
+          <li>원탭 재고용, 근무 제안 카드, 정산서(3.3% 공제 안내) 기능이 있습니다</li>
+          <li>구독하면 게재가 무료이고, 비구독이면 크레딧이 차감되는 수익 모델입니다</li>
+        </ul>
+        <div class="tags"><span>Next.js</span><span>TypeScript</span><span>Prisma</span><span>SQLite</span></div>
+        <div class="links"><a href="https://github.com/parksungyuop/portfolio/tree/main/projects/dealer-matching">코드 보기 →</a></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot dark fit" data-src="assets/assistant-hud.webp"><img src="assets/assistant-hud.webp" alt="음성 AI 비서 HUD" loading="lazy"></button>
+      <div class="body">
+        <div class="sub">음성 기반 데스크톱 AI 비서</div>
+        <h3>음성 AI 비서</h3>
+        <p>호출어로 깨우면 음성으로 대화하는 데스크톱 비서입니다. 호출어 감지, STT, 에이전트, TTS, HUD를 각각 스파이크로 먼저 검증한 다음 하나로 합쳤습니다.</p>
+        <ul>
+          <li>pnpm 모노레포 구조(core 패키지와 desktop 앱)</li>
+          <li>Claude Agent SDK와 MCP로 캘린더 같은 도구를 연결했습니다</li>
+          <li>onnxruntime으로 호출어를 로컬에서 감지하고, 비서가 자기 목소리를 다시 알아듣지 않도록 에코 가드를 설계했습니다</li>
+        </ul>
+        <div class="tags"><span>TypeScript</span><span>Electron</span><span>Claude Agent SDK</span><span>MCP</span><span>Vitest</span></div>
+        <div class="links"><a href="https://github.com/parksungyuop/portfolio/tree/main/projects/voice-assistant">코드 보기 →</a></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot fit pet" data-src="assets/pet-sheet.webp"><img src="assets/pet-sheet.webp" alt="데스크톱 펫 동작 프레임" loading="lazy"></button>
+      <div class="body">
+        <div class="sub">바탕화면 위를 돌아다니는 펫</div>
+        <h3>데스크톱 펫</h3>
+        <p>Codex 펫 패키지(pet.json과 스프라이트시트)를 읽어 윈도우 바탕화면에 띄우는 독립 실행 앱입니다. 더블클릭하면 Claude 앱이 열리고, Claude Code가 작업 중일 때는 펫도 노트북 앞에 앉아 같이 일합니다.</p>
+        <ul>
+          <li>커서 방향을 16방향으로 따라 보고, 던지면 중력과 바운스가 적용됩니다</li>
+          <li>세션 jsonl 파일이 갱신되는지 보고 작업 중인지 판단합니다. 별도 설정이나 훅은 필요 없습니다</li>
+          <li>사진을 펫팩으로 바꾸는 변환기와 스프라이트 아틀라스 빌더가 들어 있습니다</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>PyQt6</span><span>Pillow</span><span>NumPy</span></div>
+        <div class="links"><a href="https://github.com/parksungyuop/portfolio/tree/main/projects/desktop-pet">코드 보기 →</a></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="body">
+        <div class="sub">경마 데이터 수집기</div>
+        <h3>경마 데이터 수집기</h3>
+        <p>브라우저 개발자 도구로 사이트의 JSON API 구조를 직접 분석해 문서로 정리하고, 개최일, 경주, 출주, 배당 데이터를 SQLite에 모으는 수집기를 만들었습니다.</p>
+<pre class="diagram">events 1─N races 1─N entries
+                  └─N dividends (WIN/PLA/FC/TRI…)</pre>
+        <ul>
+          <li>엔드포인트 12종과 테이블 스키마를 문서로 남겼습니다</li>
+          <li>Python 표준 라이브러리만 썼습니다(urllib, sqlite3)</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>SQLite</span><span>API 분석</span></div>
+        <div class="links"><a href="https://github.com/parksungyuop/portfolio/tree/main/projects/racing-data-collector">코드 보기 →</a></div>
+      </div>
+    </article>
+
+  </div>
+</div></section>
+
+<!-- ───────── 외주 ───────── -->
+<section id="client"><div class="wrap">
+  <div class="sec-head"><h2>외주 작업</h2><p>고객사 작업이라 코드는 공개하지 않고 화면만 싣습니다</p></div>
+  <div class="grid">
+
+    <article class="card wide">
+      <div class="shot pair">
+        <button data-src="assets/lawfirm-desktop.webp" data-tall><img src="assets/lawfirm-desktop.webp" alt="노무법인 홈페이지 데스크톱" loading="lazy"></button>
+        <button data-src="assets/lawfirm-mobile.webp" data-tall><img src="assets/lawfirm-mobile.webp" alt="노무법인 홈페이지 모바일" loading="lazy"></button>
+      </div>
+      <div class="body">
+        <div class="sub">노무법인 홈페이지 리뉴얼 · 디자인과 개발</div>
+        <h3>노무법인 홈페이지</h3>
+        <p>병원, 노무, 법률 분야 사이트 6곳의 UI를 분석한 뒤 시안을 잡고, 두 번의 버전을 거쳐 반응형 사이트로 만들었습니다. 이미지를 클릭하면 전체 페이지를 볼 수 있습니다.</p>
+        <div class="tags"><span>UI 리서치</span><span>디자인 시안</span><span>반응형 퍼블리싱</span><span>Vite</span></div>
+      </div>
+    </article>
+
+    <article class="card wide">
+      <div class="shot duo">
+        <button data-src="assets/datecourse-overview.webp"><img src="assets/datecourse-overview.webp" alt="데이트 코스 앱 v10 디자인판 모바일 화면 4종" loading="lazy"></button>
+        <button data-src="assets/datecourse-result.webp"><img src="assets/datecourse-result.webp" alt="데이트 코스 앱 코스 결과와 지도" loading="lazy"></button>
+      </div>
+      <div class="body">
+        <div class="sub">데이트 코스 추천 앱 · 기획부터 프로토타입 v10까지</div>
+        <h3>데이트 코스 추천 앱</h3>
+        <p>회원가입 때 받은 취향 체크리스트와 챗봇의 질문을 조합해 데이트 코스를 짜 주는 앱입니다. 대표님 요청을 받아 v2부터 v10까지 다듬었고, 마지막 디자인판(v10d)은 그린 테마로 화면을 다시 그렸습니다.</p>
+        <ul>
+          <li>코스 결과는 지도 위에 동선과 도보 시간을 표시하고, 반영한 조건과 반영하지 못한 조건을 함께 보여줍니다</li>
+          <li>오늘의 카드, 에디터 추천, 커뮤니티, 레드코인 같은 수익 모델까지 화면으로 기획했습니다</li>
+          <li>버전마다 320px과 1280px 화면, 다크 모드를 캡처해 검증 기록을 남겼습니다</li>
+        </ul>
+        <div class="modules">
+          <h4>코스 엔진 모듈</h4>
+          <p>코스는 규칙 코드가 짜고, AI는 사람이 쓴 문장을 이해하는 데만 씁니다. 칩으로만 답한 요청은 AI를 한 번도 부르지 않습니다.</p>
+          <ol class="pipeline">
+            <li><b>취향 읽기</b>꼭 지킬 조건과 가중치로 나눔</li>
+            <li><b>코스 틀</b>시간대·일정으로 자리 순서</li>
+            <li><b>거르기</b>19+, 식단, 술 조건</li>
+            <li><b>중심 가게</b>점수 상위 식당 먼저</li>
+            <li><b>자리 채우기</b>700m 안 후보 조합</li>
+            <li><b>일정 맞추기</b>넘치면 뒤 자리 줄임</li>
+            <li><b>3코스 고르기</b>서로 겹치지 않게</li>
+            <li><b>결과 정리</b>동선, 대안, 경고</li>
+          </ol>
+          <div class="mod-grid">
+            <dl>
+              <dt><code>engine/engine.py</code></dt><dd>위 8단계를 실행하는 코스 엔진(Python). 코스를 최대 3개 만들고, 자리마다 대안 가게를 함께 둡니다</dd>
+              <dt><code>engine/reddata.py</code></dt><dd>가게 자료(SQLite). 강남구 실제 장소 약 1만 1천 곳과 가게 특징 태그, 영업시간</dd>
+              <dt><code>engine/ai.py</code></dt><dd>Claude 연동. 자유 문장을 조건표로 바꾸고, 코스 설명 글을 씁니다. 키가 없으면 규칙 해석으로 대신해 결과가 같습니다</dd>
+              <dt><code>engine/flow/</code></dt><dd>점수 계산 과정을 시나리오 12개로 보여 주는 설명 페이지(함께 실은 캡처)</dd>
+              <dt><code>data/</code></dt><dd>장소 수집 스크립트와 전국 법정동 4단계 지역 자료</dd>
+              <dt><code>tests/</code>, <code>engine/test_*.py</code></dt><dd>엔진 98개, AI 147개, 화면 기능 시험. 임의 요청 300개에서 규칙 위반 0건</dd>
+            </dl>
+            <button class="mod-shot" data-src="assets/datecourse-engine.webp"><img src="assets/datecourse-engine.webp" alt="데이트 코스 앱 코스 엔진 점수 계산 설명 화면" loading="lazy"></button>
+          </div>
+        </div>
+        <div class="tags"><span>서비스 기획</span><span>프로토타입</span><span>Python 코스 엔진</span><span>Claude API</span><span>SQLite</span><span>지도 연동</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="shot row">
+        <button data-src="assets/overlay-04.webp"><img src="assets/overlay-04.webp" alt="오버레이 앱 오버레이 설정" loading="lazy"></button>
+        <button data-src="assets/overlay-06.webp"><img src="assets/overlay-06.webp" alt="오버레이 앱 조준선" loading="lazy"></button>
+        <button data-src="assets/overlay-07.webp"><img src="assets/overlay-07.webp" alt="오버레이 앱 터치 투과" loading="lazy"></button>
+      </div>
+      <div class="body">
+        <div class="sub">갤럭시 폴드5용 Android 오버레이 앱</div>
+        <h3>모바일 게임 오버레이 앱</h3>
+        <p>게임 화면 위에 반투명 가이드라인을 겹쳐 띄우고, 터치는 아래 게임으로 그대로 전달되는 오버레이 앱입니다. 플로팅 버튼으로 조준 모드와 게임 모드를 전환하고, 크기와 공 반지름을 보정할 수 있습니다.</p>
+        <div class="tags"><span>Android</span><span>Overlay · 터치 투과</span><span>에뮬레이터 테스트</span></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <button class="shot" data-src="assets/sns-booster.webp"><img src="assets/sns-booster.webp" alt="SNS 마케팅 플랫폼 콘텐츠 부스터" loading="lazy"></button>
+      <div class="body">
+        <div class="sub">SNS 마케팅 플랫폼 · 화면 퍼블리싱</div>
+        <h3>SNS 마케팅 플랫폼</h3>
+        <p>중국 SNS 7개 채널용 콘텐츠 업로드와 부스터 화면을 HTML로 퍼블리싱하고, 같은 화면을 Illustrator 원본(.ai)으로도 다시 만들어 납품했습니다.</p>
+        <div class="tags"><span>HTML/CSS</span><span>Illustrator</span><span>대시보드 UI</span></div>
+      </div>
+    </article>
+
+    <article class="card wide">
+      <div class="shot quad">
+        <button data-src="assets/inventory-dashboard.webp"><img src="assets/inventory-dashboard.webp" alt="재고 대시보드 대시보드" loading="lazy"></button>
+        <button data-src="assets/inventory-inventory.webp"><img src="assets/inventory-inventory.webp" alt="재고 대시보드 재고 관리" loading="lazy"></button>
+        <button data-src="assets/inventory-ordering.webp"><img src="assets/inventory-ordering.webp" alt="재고 대시보드 발주 관리" loading="lazy"></button>
+        <button data-src="assets/inventory-menuboard.webp"><img src="assets/inventory-menuboard.webp" alt="재고 대시보드 메뉴판" loading="lazy"></button>
+      </div>
+      <div class="body">
+        <div class="sub">카페·음식점 재고·발주 관리 MVP · 웹 UI 납품</div>
+        <h3>재고·발주 대시보드</h3>
+        <p>대시보드, 재고 관리, 발주 관리, 메뉴판 4개 화면을 3일 일정으로 설계하고 HTML/CSS로 납품했습니다. 레퍼런스 사이트의 간격, 글꼴, 색 값을 브라우저에서 직접 측정해 디자인 기준을 잡았습니다.</p>
+        <ul>
+          <li>화면 오른쪽에 "AI 도우미" 대화 패널을 두어 판매, 원가, 폐기 수치를 물어보는 흐름을 넣었습니다</li>
+          <li>1440, 768, 390px 세 가지 폭과 데이터가 없을 때의 빈 화면까지 캡처해 함께 납품했습니다</li>
+          <li>색, 글꼴, 버튼 규칙을 정리한 디자인 규칙 문서를 따로 만들었습니다</li>
+        </ul>
+        <div class="tags"><span>대시보드 UI</span><span>반응형</span><span>디자인 토큰</span><span>HTML/CSS</span></div>
+      </div>
+    </article>
+
+  </div>
+</div></section>
+
+<!-- ───────── 일러스트 ───────── -->
+<section id="illust"><div class="wrap">
+  <div class="sec-head"><h2>일러스트레이션</h2><p>SNS 마케팅 플랫폼 퍼블리싱 화면 · Adobe Illustrator 원본</p></div>
+  <div class="illust">
+    <button data-src="assets/illust-1.webp" data-tall><img src="assets/illust-1.webp" alt="SNS 마케팅 플랫폼 일러스트 1" loading="lazy"></button>
+    <button data-src="assets/illust-2.webp" data-tall><img src="assets/illust-2.webp" alt="SNS 마케팅 플랫폼 일러스트 2" loading="lazy"></button>
+    <button data-src="assets/illust-3.webp" data-tall><img src="assets/illust-3.webp" alt="SNS 마케팅 플랫폼 일러스트 3" loading="lazy"></button>
+    <button data-src="assets/illust-4.webp" data-tall><img src="assets/illust-4.webp" alt="SNS 마케팅 플랫폼 일러스트 4" loading="lazy"></button>
+    <button data-src="assets/illust-5.webp" data-tall><img src="assets/illust-5.webp" alt="SNS 마케팅 플랫폼 일러스트 5" loading="lazy"></button>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <h2>연락</h2>
+  <p><a href="https://github.com/parksungyuop">github.com/parksungyuop</a></p>
+  <p>전체 코드: <a href="https://github.com/parksungyuop/portfolio">github.com/parksungyuop/portfolio</a></p>
+</div></footer>
+
+<dialog id="lb"><div class="scroll"><img alt=""></div></dialog>
+<script>
+const lb = document.getElementById('lb'), img = lb.querySelector('img');
+document.querySelectorAll('[data-src]').forEach(b => b.addEventListener('click', () => {
+  img.src = b.dataset.src; img.alt = b.querySelector('img')?.alt || '';
+  lb.querySelector('.scroll').scrollTop = 0; lb.showModal();
+}));
+lb.addEventListener('click', () => lb.close());
+const root = document.documentElement;
+try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch {}
+document.getElementById('theme').addEventListener('click', () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch {}
+});
+</script>
+</body>
+</html>

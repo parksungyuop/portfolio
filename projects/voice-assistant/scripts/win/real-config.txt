@@ -1,0 +1,5 @@
+{
+  "hud": { "displayName": "비서", "honorific": "홍길동 님", "honorificEn": "President Hong" },
+  "wake": { "clap": true, "clapSensitivity": 0.5 },
+  "brain": { "model": "claude-opus-5-5" }
+}
